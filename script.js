@@ -29,7 +29,10 @@ const projects = [
       "El proyecto incluye autenticación, control por roles, endpoints en PHP, base de datos MySQL, pagos con Wompi y medición con GTM. La interfaz está pensada para leer costos, rendimiento y oportunidades de optimización sin depender de reportes externos.",
     technologies: ["PHP", "MySQL", "Meta Ads API", "Google Ads API", "Wompi", "GTM", "JavaScript"],
     link: "https://gometrical.com/",
-    image: "assets/portfolio-preview.png",
+    image: "assets/projects/gometrical-scroll.png",
+    motion: "assets/projects/gometrical-scroll.png",
+    previewDuration: 52,
+    previewTravel: "-50%",
     accent: "#f4f4f0",
     glow: "rgba(255, 255, 255, 0.08)",
   },
@@ -44,7 +47,10 @@ const projects = [
       "El sistema centraliza hasta 25.000 leads mensuales, usa embudo visual, roles por equipo, métricas CPA, ROAS, ticket y conversión, bots de respuesta y reportes de ROI. La operación redujo el tiempo de respuesta 78% y mejoró el cierre 19%.",
     technologies: ["PHP", "MySQL", "Meta Ads API", "CRM", "Automatizaciones", "Roles", "Reportes ROI"],
     link: "https://synqbee.com/",
-    image: "assets/portfolio-preview.png",
+    image: "assets/projects/synqbee-scroll.png",
+    motion: "assets/projects/synqbee-scroll.png",
+    previewDuration: 42,
+    previewTravel: "-50%",
     accent: "#f4f4f0",
     glow: "rgba(255, 255, 255, 0.08)",
   },
@@ -309,6 +315,29 @@ function initProjectCarousel() {
       .join("");
   }
 
+  const technologyIcons = {
+    "HTML": "html5",
+    "CSS": "css",
+    "JavaScript": "javascript",
+    "PHP": "php",
+    "MySQL": "mysql",
+    "Figma": "figma",
+    "WordPress": "wordpress",
+    "WooCommerce": "woocommerce",
+    "Meta Ads API": "meta",
+    "Google Ads API": "googleads",
+    "GTM": "googletagmanager",
+  };
+
+  function renderTechnology(technology) {
+    const icon = technologyIcons[technology];
+    const image = icon
+      ? `<img src="https://cdn.simpleicons.org/${icon}/111111" alt="" loading="lazy" aria-hidden="true">`
+      : "";
+
+    return `<span class="${icon ? "has-tech-icon" : ""}">${image}<b>${technology}</b></span>`;
+  }
+
   function updateDots() {
     if (!els.dots) return;
 
@@ -413,7 +442,7 @@ function initProjectCarousel() {
         els.frame.removeAttribute("src");
       }
     }
-    els.tech.innerHTML = project.technologies.map(technology => `<span>${technology}</span>`).join("");
+    els.tech.innerHTML = project.technologies.map(renderTechnology).join("");
     renderProjectHighlights(project);
 
     updateDots();

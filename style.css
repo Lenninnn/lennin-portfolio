@@ -617,6 +617,78 @@ textarea {
   }
 }
 
+/* Project preview and technology refinements. */
+@media (min-width: 981px) {
+  .project-shell {
+    width: min(1440px, 100%);
+  }
+
+  .project-panel[data-project-panel="projects"] {
+    grid-template-columns: minmax(0, 1.62fr) minmax(290px, .58fr);
+  }
+}
+
+.project-motion-preview {
+  background: #ffffff;
+}
+
+.project-motion-shot {
+  width: 100%;
+  max-width: none;
+  image-rendering: auto;
+}
+
+.project-tech span {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 11px;
+  border-color: #cecec8;
+  color: #111111;
+  background: #f4f4f1;
+}
+
+.project-tech span img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.project-tech span b {
+  font: inherit;
+}
+
+.project-dots {
+  min-width: 58px;
+  justify-content: center;
+  gap: 7px;
+}
+
+.project-dot,
+.project-dot.is-active {
+  height: 3px;
+  border: 0;
+  border-radius: 0;
+}
+
+.project-dot {
+  width: 18px;
+  background: #aaa9a3;
+}
+
+.project-dot.is-active {
+  width: 34px;
+  background: #111111;
+}
+
+.project-control {
+  color: #111111;
+  border-color: #bdbdb7;
+  background: #ffffff;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .project-motion-track {
     animation: none;
@@ -2043,3 +2115,19 @@ body,
     text-align: center;
   }
 }
+
+/* Final project refinements: desktop captures, official tech marks and visible progress. */
+@media (min-width: 981px) {
+  .project-shell { width: min(1440px, 100%); }
+  .project-panel[data-project-panel="projects"] { grid-template-columns: minmax(0, 1.62fr) minmax(290px, .58fr); }
+}
+.project-motion-preview { background: #fff; }
+.project-motion-shot { width: 100%; max-width: none; image-rendering: auto; }
+.project-tech span { min-height: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; border-color: #cecec8; border-radius: 3px; color: #111; background: #f4f4f1; }
+.project-tech span img { display: block; width: 20px; height: 20px; object-fit: contain; }
+.project-tech span b { font: inherit; }
+.project-dots { min-width: 58px; justify-content: center; gap: 7px; }
+.project-dot, .project-dot.is-active { height: 3px; border: 0; border-radius: 0; }
+.project-dot { width: 18px; background: #aaa9a3; }
+.project-dot.is-active { width: 34px; background: #111; }
+.project-control { color: #111; border-color: #bdbdb7; background: #fff; }
