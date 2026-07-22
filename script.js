@@ -15,6 +15,59 @@ const observer = new IntersectionObserver(
 
 sections.forEach(section => observer.observe(section));
 
+const heroForms = document.querySelectorAll(".hero-form");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (heroForms.length && !reduceMotion.matches) {
+  let pointerX = 0;
+  let pointerY = 0;
+  const motionProfiles = [...heroForms].map((_, index) => ({
+    phase: Math.random() * Math.PI * 2 + index,
+    speed: .72 + Math.random() * .48,
+    xRange: 20 + Math.random() * 34,
+    yRange: 10 + Math.random() * 22,
+    opacityBase: .065 + Math.random() * .025,
+    opacityRange: .035 + Math.random() * .035,
+    scaleRange: .018 + Math.random() * .028,
+  }));
+
+  window.addEventListener("pointermove", event => {
+    pointerX = (event.clientX / window.innerWidth - .5) * 2;
+    pointerY = (event.clientY / window.innerHeight - .5) * 2;
+  }, { passive: true });
+
+  window.addEventListener("pointerleave", () => {
+    pointerX = 0;
+    pointerY = 0;
+  });
+
+  function animateHeroForms(time) {
+    heroForms.forEach((form, index) => {
+      const profile = motionProfiles[index];
+      const t = time * .0001 * profile.speed;
+      const driftX = (
+        Math.sin(t + profile.phase) * .72 +
+        Math.sin(t * .37 + profile.phase * 2.13) * .28
+      ) * profile.xRange;
+      const driftY = (
+        Math.cos(t * .63 + profile.phase) * .68 +
+        Math.sin(t * .29 + profile.phase * 1.47) * .32
+      ) * profile.yRange;
+      const parallax = 5 + index * 2;
+      const x = driftX + pointerX * parallax;
+      const y = driftY + pointerY * parallax;
+      const presence = (Math.sin(t * .21 + profile.phase) + 1) / 2;
+      const scale = .955 + Math.sin(t * .43 + profile.phase) * profile.scaleRange;
+      form.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+      form.style.opacity = String(profile.opacityBase + presence * profile.opacityRange);
+    });
+
+    requestAnimationFrame(animateHeroForms);
+  }
+
+  requestAnimationFrame(animateHeroForms);
+}
+
 const projectCarousel = document.querySelector("[data-project-carousel]");
 
 const projects = [
@@ -372,8 +425,22 @@ function initProjectCarousel() {
   function renderProjectHighlights(project) {
     if (!els.highlights) return;
 
+    const iconSvg = item => {
+      const text = `${item.label} ${item.detail}`.toLowerCase();
+      const svg = path => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+
+      if (/fuentes|idiomas|api|conect/.test(text)) return svg('<path d="M8 7h-2a4 4 0 0 0 0 8h2"/><path d="M16 7h2a4 4 0 0 1 0 8h-2"/><path d="M8 12h8"/>');
+      if (/pago|wompi|quote|cotiza/.test(text)) return svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/>');
+      if (/respuesta|tiempo/.test(text)) return svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>');
+      if (/25k|leads|registro|lead/.test(text)) return svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>');
+      if (/19%|100\/100|mejora|seo|retorno/.test(text)) return svg('<path d="M3 17l6-6 4 4 8-9"/><path d="M15 6h6v6"/>');
+      if (/vistas|catálogo|galería|inventario/.test(text)) return svg('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>');
+      if (/decisión|qa|operación|admin/.test(text)) return svg('<circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/>');
+      return svg('<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/>');
+    };
+
     els.highlights.innerHTML = getProjectHighlights(project)
-      .map(item => `<div class="project-highlight"><i aria-hidden="true">${item.icon || "↗"}</i><span>${item.label}</span><small>${item.detail}</small></div>`)
+      .map(item => `<div class="project-highlight"><i>${iconSvg(item)}</i><span>${item.label}</span><small>${item.detail}</small></div>`)
       .join("");
   }
 
@@ -754,6 +821,7 @@ function initProjectCarousel() {
       chip.className = "project-name-chip";
       chip.dataset.projectChipIndex = String(index);
       chip.setAttribute("aria-pressed", "false");
+      chip.setAttribute("aria-label", `Abrir proyecto: ${project.title}`);
       chip.textContent = project.title;
       chip.addEventListener("click", () => {
         const direction = visibleIndexes.indexOf(index) > getVisiblePosition(activeIndex) ? 1 : -1;
@@ -925,6 +993,7 @@ function initProjectCarousel() {
   bindControls();
   initGsap();
   scheduleAutoPlay();
+
 }
 
 initProjectCarousel();

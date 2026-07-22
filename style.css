@@ -2009,6 +2009,7 @@ body,
 .project-name-chip.is-active {
   color: #111111;
   background: transparent;
+  border-radius: 0;
 }
 
 .section-switch.is-active::after {
@@ -2567,6 +2568,7 @@ body,
   padding: 20px 12px;
   border: 1px solid #c9c9c3;
   text-align: center;
+  border-radius: 0;
 }
 
 .project-highlight + .project-highlight {
@@ -2685,6 +2687,162 @@ body,
   .about-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+  }
+}
+
+/* Larger semantic project evidence. */
+.project-gallery-toolbar {
+  padding: 30px 24px;
+}
+
+.project-highlight,
+.project-live-link {
+  min-height: 190px;
+  padding: 22px clamp(18px, 2.4vw, 34px);
+}
+
+.project-highlight i {
+  width: 44px !important;
+  height: 44px !important;
+  display: block;
+  margin: 0 0 22px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: #d1d1ca;
+}
+
+.project-highlight i svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.project-highlight span,
+.project-live-link span {
+  font-size: clamp(1.85rem, 2.45vw, 2.7rem);
+}
+
+.project-highlight small,
+.project-live-link strong {
+  font-size: .72rem;
+  line-height: 1.45;
+}
+
+.project-live-link::after {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  color: #d1d1ca;
+  font-size: 2rem;
+}
+
+/* Final case-study strip: one editorial composition, not four cloned cards. */
+.project-gallery-toolbar {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 22px 18px;
+  border: 0;
+  color: #f4f4f1;
+  background: #111111;
+}
+
+.project-highlight {
+  min-height: 142px;
+  padding: 14px clamp(16px, 2vw, 28px);
+  border: 0;
+  border-right: 1px solid #363633;
+  color: #f4f4f1;
+  background: transparent;
+}
+
+.project-highlight i {
+  width: auto;
+  height: auto;
+  margin: 0 0 18px;
+  border: 0;
+  border-radius: 0;
+  color: #9b9b95;
+  background: transparent;
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-size: 1.35rem;
+}
+
+.project-highlight span {
+  color: #f4f4f1;
+  font-size: clamp(1.55rem, 2.05vw, 2.1rem);
+}
+
+.project-highlight small {
+  margin-top: 5px;
+  color: #aaa9a3;
+  font-size: .65rem;
+}
+
+.project-live-link {
+  min-height: 142px;
+  padding: 14px clamp(16px, 2vw, 28px);
+  color: #f4f4f1;
+  background: transparent;
+}
+
+.project-live-link::after {
+  width: auto;
+  height: auto;
+  margin: 0 0 18px;
+  border: 0;
+  border-radius: 0;
+  color: #9b9b95;
+  background: transparent;
+  font-size: 1.35rem;
+}
+
+.project-live-link span {
+  color: #f4f4f1;
+  font-size: clamp(1.55rem, 2.05vw, 2.1rem);
+}
+
+.project-live-link strong {
+  margin-top: 5px;
+  color: #aaa9a3;
+  font-size: .65rem;
+}
+
+.project-live-link:hover,
+.project-live-link:focus-visible {
+  color: #111111;
+  background: #f4f4f1;
+}
+
+.project-live-link:hover span,
+.project-live-link:hover strong,
+.project-live-link:hover::after,
+.project-live-link:focus-visible span,
+.project-live-link:focus-visible strong,
+.project-live-link:focus-visible::after {
+  color: #111111;
+}
+
+@media (max-width: 900px) {
+  .project-gallery-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 12px;
+  }
+
+  .project-highlight,
+  .project-live-link {
+    min-height: 130px;
+  }
+
+  .project-highlight:nth-child(2) {
+    border-right: 0;
+  }
+
+  .project-highlight:nth-child(-n + 2) {
+    border-bottom: 1px solid #363633;
+  }
+
+  .project-live-link {
+    border-top: 1px solid #363633;
   }
 }
 
@@ -2841,26 +2999,32 @@ body,
 .project-live-link {
   position: relative;
   min-height: 132px;
-  padding: 18px 42px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 17px 14px;
   border: 0;
   color: #111111;
   background: transparent;
-  text-align: left;
+  text-align: center;
 }
 
 .project-live-link::after {
   content: "↗";
-  position: absolute;
-  top: 50%;
-  right: 18px;
+  position: static;
+  order: -1;
   width: 30px;
   height: 30px;
+  margin-bottom: 7px;
   display: grid;
   place-items: center;
+  border: 1px solid #111111;
   border-radius: 50%;
-  color: #ffffff;
-  background: #111111;
-  transform: translateY(-50%);
+  color: #111111;
+  background: transparent;
+  transform: none;
   transition: transform 180ms ease;
 }
 
@@ -2870,13 +3034,23 @@ body,
 }
 
 .project-live-link span {
-  font-size: .56rem;
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: .95;
+  text-transform: none;
 }
 
 .project-live-link strong {
-  max-width: 16ch;
-  margin-top: 5px;
-  font-size: .67rem;
+  max-width: 22ch;
+  margin-top: 2px;
+  color: #555550;
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-size: .64rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .project-live-link:hover,
@@ -2888,7 +3062,7 @@ body,
 
 .project-live-link:hover::after,
 .project-live-link:focus-visible::after {
-  transform: translateY(-50%) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 @media (max-width: 900px) {
@@ -2907,4 +3081,579 @@ body,
   .project-live-link {
     border-top: 1px solid #c8c8c2;
   }
+}
+
+/* Scale correction after the final strip rules. */
+.project-gallery-toolbar { padding: 30px 24px; }
+.project-highlight, .project-live-link { min-height: 190px; padding: 22px clamp(18px, 2.4vw, 34px); }
+.project-highlight i { width: 44px !important; height: 44px !important; display: block; margin: 0 0 22px; border: 0 !important; border-radius: 0 !important; color: #d1d1ca; }
+.project-highlight i svg { display: block; width: 100%; height: 100%; }
+.project-highlight span, .project-live-link span { font-size: clamp(1.85rem, 2.45vw, 2.7rem); }
+.project-highlight small, .project-live-link strong { font-size: .72rem; line-height: 1.45; }
+.project-live-link::after { width: 44px; height: 44px; margin-bottom: 22px; border: 0; border-radius: 0; color: #d1d1ca; font-size: 2rem; }
+
+/* Compact, high-contrast project facts. */
+.project-gallery-toolbar {
+  min-height: 0;
+  padding: 0;
+  border: 1px solid #c8c8c2;
+  background: #f4f4f1;
+}
+
+.project-highlight,
+.project-live-link {
+  min-height: 112px;
+  padding: 16px 14px;
+  color: #111111;
+}
+
+.project-highlight i,
+.project-live-link::after {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 0 10px;
+  color: #111111;
+}
+
+.project-highlight span,
+.project-live-link span {
+  color: #111111;
+  font-size: clamp(1.15rem, 1.55vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.project-highlight small,
+.project-live-link strong {
+  margin-top: 4px;
+  color: #4e4e49;
+  font-size: .66rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.project-live-link {
+  background: #e6e6e0;
+}
+
+.project-live-link:hover,
+.project-live-link:focus-visible {
+  background: #d7d7d0;
+}
+
+/* Forced final state: centered and visible above legacy component rules. */
+.project-gallery-toolbar {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: stretch !important;
+}
+
+.project-highlight,
+.project-live-link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.project-highlight > i,
+.project-live-link::after {
+  opacity: 1 !important;
+  color: #111111 !important;
+}
+
+.project-highlight > span,
+.project-live-link > span {
+  display: block !important;
+  opacity: 1 !important;
+  color: #111111 !important;
+}
+
+.project-highlight > small,
+.project-live-link > strong {
+  display: block !important;
+  opacity: 1 !important;
+  color: #4e4e49 !important;
+}
+
+/* Four identical visual modules: icon, title, supporting text. */
+.project-gallery-toolbar {
+  gap: 0 !important;
+  padding: 0 !important;
+  background: #e6e6e0 !important;
+}
+
+.project-highlight,
+.project-live-link {
+  min-height: 240px !important;
+  gap: 12px !important;
+  padding: 28px 20px !important;
+  border: 0 !important;
+  border-right: 1px solid #c6c6c0 !important;
+  background: #e6e6e0 !important;
+}
+
+.project-live-link {
+  border-right: 0 !important;
+}
+
+.project-highlight > i,
+.project-live-link::after {
+  order: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  margin: 0 0 4px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 2.4rem !important;
+}
+
+.project-highlight > span,
+.project-live-link > span {
+  order: 1 !important;
+  margin: 0 !important;
+  font-size: clamp(1.5rem, 2.3vw, 2.15rem) !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+.project-highlight > small,
+.project-live-link > strong {
+  order: 2 !important;
+  max-width: 22ch !important;
+  margin: 0 !important;
+  font-size: .74rem !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+
+/* Restored compact light summary — four equal, readable modules. */
+.project-gallery-toolbar {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  padding: 0 !important;
+  border: 1px solid #c8c8c2 !important;
+  background: #f7f7f4 !important;
+}
+
+.project-highlight,
+.project-live-link {
+  min-height: 142px !important;
+  gap: 7px !important;
+  padding: 18px 16px !important;
+  border: 0 !important;
+  border-right: 1px solid #c8c8c2 !important;
+  color: #111111 !important;
+  background: #f7f7f4 !important;
+}
+
+.project-live-link {
+  border-right: 0 !important;
+}
+
+.project-highlight > i,
+.project-live-link::after {
+  width: 30px !important;
+  height: 30px !important;
+  margin: 0 0 7px !important;
+  color: #111111 !important;
+}
+
+.project-highlight > span,
+.project-live-link > span {
+  color: #111111 !important;
+  font-size: clamp(1.2rem, 1.55vw, 1.55rem) !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+.project-highlight > small,
+.project-live-link > strong {
+  color: #555550 !important;
+  font-size: .66rem !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+
+/* Remove inherited self-alignment that was shifting text off the icon axis. */
+.project-highlight > i,
+.project-highlight > span,
+.project-highlight > small,
+.project-live-link::after,
+.project-live-link > span,
+.project-live-link > strong {
+  align-self: center !important;
+  justify-self: center !important;
+  text-align: center !important;
+}
+
+.project-live-link:hover,
+.project-live-link:focus-visible {
+  background: #e7e7e1 !important;
+}
+
+/* The live-site module is the only actionable summary tile. */
+.project-live-link {
+  background: #deded7 !important;
+  cursor: pointer;
+  transition: background-color .18s ease, color .18s ease !important;
+}
+
+.project-live-link:hover,
+.project-live-link:focus-visible {
+  background: #cfcfc7 !important;
+}
+
+/* Social profiles stay attached to the introduction, below the role. */
+.hero-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.hero-social a {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #bdbdb7;
+  border-radius: 50%;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.hero-social a:hover,
+.hero-social a:focus-visible {
+  background: #deded7;
+  border-color: #111111;
+  transform: translateY(-2px);
+}
+
+.hero-social img {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+
+.hero-social svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  color: #111111;
+}
+
+@media (max-width: 720px) {
+  .hero-social {
+    justify-content: flex-start;
+  }
+}
+
+/* Project navigator: generous labels plus a brief arrival cue on scroll. */
+.project-filter,
+.project-name-chip {
+  min-height: 42px;
+  padding: 10px 15px 11px 0;
+  font-size: clamp(.7rem, .78vw, .84rem);
+  letter-spacing: .14em;
+  line-height: 1;
+}
+
+.project-name-chip {
+  position: relative;
+  cursor: pointer;
+}
+
+.project-name-chip::after {
+  content: "";
+  position: absolute;
+  right: 15px;
+  bottom: 3px;
+  left: 0;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .22s ease;
+}
+
+.project-name-chip:hover,
+.project-name-chip:focus-visible {
+  color: #111111;
+  transform: translateX(4px);
+}
+
+.project-name-chip:hover::after,
+.project-name-chip:focus-visible::after,
+.project-name-chip.is-active::after {
+  transform: scaleX(1);
+}
+
+.project-name-chip:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-name-chip,
+  .project-name-chip::after { transition: none; }
+}
+
+/* Center the project navigator and keep one, intentional active indicator. */
+.project-submenu {
+  grid-template-columns: 1fr !important;
+  justify-items: center;
+  gap: 2px !important;
+}
+
+.project-filter-row,
+.project-name-row {
+  justify-content: center !important;
+  width: 100%;
+}
+
+.project-filter::before,
+.project-name-chip::before,
+.project-filter.is-active::before,
+.project-name-chip.is-active::before {
+  content: "" !important;
+  width: 0 !important;
+}
+
+.project-name-chip::after {
+  right: 12px;
+  bottom: 4px;
+  left: 12px;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.project-name-chip:hover,
+.project-name-chip:focus-visible {
+  transform: translateY(-2px);
+}
+
+.project-name-chip:hover::after,
+.project-name-chip:focus-visible::after,
+.project-name-chip.is-active::after {
+  transform: scaleX(1);
+}
+
+.project-name-chip:active {
+  transform: translateY(0) scale(.97);
+}
+
+/* Replace all active underlines with one quiet location marker. */
+.project-filter,
+.project-name-chip {
+  position: relative;
+  border-bottom-color: transparent !important;
+}
+
+.project-filter.is-active,
+.project-name-chip.is-active {
+  border-color: transparent !important;
+}
+
+.project-filter::after,
+.project-name-chip::after {
+  content: "";
+  position: absolute;
+  right: auto;
+  bottom: 1px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateX(-50%) scale(0);
+  transform-origin: center;
+  transition: transform .18s ease;
+}
+
+.project-filter.is-active::after,
+.project-name-chip.is-active::after {
+  transform: translateX(-50%) scale(1);
+}
+
+.project-filter:hover::after,
+.project-filter:focus-visible::after,
+.project-name-chip:hover::after,
+.project-name-chip:focus-visible::after {
+  transform: translateX(-50%) scale(.65);
+}
+
+.project-filter.is-active:hover::after,
+.project-filter.is-active:focus-visible::after,
+.project-name-chip.is-active:hover::after,
+.project-name-chip.is-active:focus-visible::after {
+  transform: translateX(-50%) scale(1);
+}
+
+/* Decorative geometry belongs only to the opening hero. */
+.screen-hero {
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.screen-hero .nav,
+.screen-hero .hero-content,
+.screen-hero .side-text {
+  position: relative;
+  z-index: 2;
+}
+
+.screen-hero .nav {
+  position: absolute;
+}
+
+.hero-forms {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-form {
+  position: absolute;
+  display: block;
+  background: #dfe9f8;
+  opacity: .58;
+}
+
+.hero-form-orbit {
+  top: -27vw;
+  right: -4vw;
+  width: min(48vw, 770px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid #d3e0f2;
+  background: transparent;
+}
+
+.hero-form-sphere {
+  top: 27%;
+  right: 10%;
+  width: clamp(92px, 11vw, 182px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c7dafa;
+  opacity: .5;
+}
+
+.hero-form-corner {
+  bottom: -16vw;
+  left: -9vw;
+  width: min(28vw, 440px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid #d9e4f3;
+  background: transparent;
+  opacity: .68;
+}
+
+.hero-form-square {
+  right: 26%;
+  bottom: 16%;
+  width: clamp(54px, 6vw, 96px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #e5eefb;
+  opacity: .75;
+}
+
+@media (max-width: 720px) {
+  .hero-form-orbit { top: -16vw; right: -32vw; width: 90vw; }
+  .hero-form-sphere { top: 18%; right: -8vw; opacity: .38; }
+  .hero-form-corner { bottom: -14vw; left: -18vw; width: 62vw; }
+  .hero-form-square { display: none; }
+}
+
+/* Warm orange variation for the hero-only circle pattern. */
+.hero-form,
+.hero-form-sphere,
+.hero-form-square,
+.hero-form-top {
+  background: #E94E17;
+}
+
+.hero-form-orbit,
+.hero-form-corner,
+.hero-form-edge {
+  border-color: #E94E17;
+}
+
+.hero-form-top {
+  top: 12%;
+  left: 15%;
+  width: clamp(32px, 3.8vw, 68px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: .5;
+}
+
+.hero-form-edge {
+  right: -4vw;
+  bottom: 28%;
+  width: clamp(68px, 9vw, 142px);
+  aspect-ratio: 1;
+  border: 1px solid #E94E17;
+  border-radius: 50%;
+  background: transparent;
+  opacity: .55;
+}
+
+@media (max-width: 720px) {
+  .hero-form-top { left: 8%; }
+  .hero-form-edge { right: -14vw; }
+}
+
+/* Keep the floating geometry inside the hero and deliberately quiet. */
+.hero-form-orbit {
+  top: 8%;
+  right: 10%;
+  width: min(31vw, 520px);
+}
+
+.hero-form-sphere { top: 24%; right: 14%; }
+
+.hero-form-corner {
+  bottom: 7%;
+  left: 8%;
+  width: min(20vw, 320px);
+}
+
+.hero-form-square { right: 30%; bottom: 18%; }
+.hero-form-top { top: 14%; left: 12%; }
+.hero-form-edge { right: 8%; bottom: 31%; }
+
+@media (max-width: 720px) {
+  .hero-form-orbit { top: 7%; right: 5%; width: 52vw; }
+  .hero-form-sphere { top: 24%; right: 10%; }
+  .hero-form-corner { bottom: 8%; left: 7%; width: 38vw; }
+  .hero-form-edge { right: 7%; }
+}
+
+/* Every ornament is a filled circle with its own clear area. */
+.hero-form-orbit,
+.hero-form-corner,
+.hero-form-edge {
+  border: 0;
+  background: #E94E17;
+}
+
+.hero-form-orbit { top: 6%; right: 7%; width: min(20vw, 340px); }
+.hero-form-sphere { top: 46%; right: 12%; width: clamp(72px, 7vw, 118px); }
+.hero-form-corner { bottom: 9%; left: 8%; width: min(14vw, 230px); }
+.hero-form-square { bottom: 22%; right: 42%; width: clamp(42px, 4vw, 68px); }
+.hero-form-top { top: 20%; left: 12%; }
+.hero-form-edge { top: 59%; right: 36%; bottom: auto; width: clamp(58px, 6vw, 100px); }
+
+@media (max-width: 720px) {
+  .hero-form-orbit { top: 8%; right: 8%; width: 35vw; }
+  .hero-form-sphere { top: 52%; right: 10%; }
+  .hero-form-corner { bottom: 9%; left: 8%; width: 26vw; }
+  .hero-form-square { right: 43%; bottom: 25%; }
+  .hero-form-top { top: 18%; left: 12%; }
+  .hero-form-edge { top: 62%; right: 34%; }
 }
