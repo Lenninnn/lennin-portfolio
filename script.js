@@ -29,9 +29,21 @@ const projects = [
       "El proyecto incluye autenticación, control por roles, endpoints en PHP, base de datos MySQL, pagos con Wompi y medición con GTM. La interfaz está pensada para leer costos, rendimiento y oportunidades de optimización sin depender de reportes externos.",
     technologies: ["PHP", "MySQL", "Meta Ads API", "Google Ads API", "Wompi", "GTM", "JavaScript"],
     link: "https://gometrical.com/",
-    image: "assets/projects/gometrical-scroll.png",
-    motion: "assets/projects/gometrical-scroll.png",
-    previewDuration: 52,
+    image: "assets/projects/gometrical-01.png",
+    motionFrames: [
+      "assets/projects/gometrical-01.png",
+      "assets/projects/gometrical-02.png",
+      "assets/projects/gometrical-03.png",
+      "assets/projects/gometrical-04.png",
+      "assets/projects/gometrical-05.png",
+      "assets/projects/gometrical-06.png",
+      "assets/projects/gometrical-07.png",
+      "assets/projects/gometrical-08.png",
+      "assets/projects/gometrical-09.png",
+      "assets/projects/gometrical-10.png",
+      "assets/projects/gometrical-11.png",
+    ],
+    previewDuration: 58,
     previewTravel: "-50%",
     accent: "#f4f4f0",
     glow: "rgba(255, 255, 255, 0.08)",
@@ -284,6 +296,56 @@ function initProjectCarousel() {
   }
 
   function getProjectHighlights(project) {
+    const highlightsByProject = {
+      "GOMETRICAL": [
+        { icon: "↗", label: "2 fuentes", detail: "Meta y Google Ads reunidos" },
+        { icon: "◫", label: "Pago real", detail: "Checkout firmado con Wompi" },
+        { icon: "◎", label: "Decisión", detail: "Costos y retorno en contexto" },
+      ],
+      "SYNQBEE CRM": [
+        { icon: "↗", label: "25K+ / mes", detail: "Leads procesados" },
+        { icon: "⌁", label: "−78%", detail: "Tiempo de primera respuesta" },
+        { icon: "◇", label: "+19%", detail: "Mejora promedio de cierre" },
+      ],
+      "NOVANK": [
+        { icon: "◫", label: "15 vistas", detail: "Flujo bancario completo" },
+        { icon: "↔", label: "Prototipo", detail: "Navegable antes de desarrollar" },
+        { icon: "◎", label: "QA", detail: "Estados y confirmaciones reales" },
+      ],
+      "DIVIX WEBINAR": [
+        { icon: "↗", label: "Registro", detail: "Inscripción orientada a conversión" },
+        { icon: "◫", label: "Agenda", detail: "Contenido y expertos ordenados" },
+        { icon: "⌁", label: "Operación", detail: "Registros visibles en admin" },
+      ],
+      "DELICIAS BENDITAS": [
+        { icon: "◇", label: "Catálogo", detail: "Productos fáciles de recorrer" },
+        { icon: "↗", label: "Pedido", detail: "Camino corto hacia WhatsApp" },
+        { icon: "◎", label: "Móvil", detail: "Lectura pensada para antojos" },
+      ],
+      "ELEMENTO INMOBILIARIO": [
+        { icon: "⌂", label: "Inventario", detail: "Propiedades con contexto" },
+        { icon: "↗", label: "100/100", detail: "SEO técnico en PageSpeed" },
+        { icon: "⌁", label: "Lead", detail: "WhatsApp y formulario conectados" },
+      ],
+      "GLOBAL REACH": [
+        { icon: "↔", label: "2 idiomas", detail: "Arquitectura ES / EN" },
+        { icon: "◫", label: "6 rutas", detail: "Servicios migratorios claros" },
+        { icon: "↗", label: "13K+", detail: "Casos comunicados" },
+      ],
+      "SOUNDGEAR": [
+        { icon: "≈", label: "Audio", detail: "Servicios explicados por espacio" },
+        { icon: "◇", label: "Sistema", detail: "Identidad visual consistente" },
+        { icon: "↗", label: "Contacto", detail: "Solicitud directa y medible" },
+      ],
+      "OUTDOOR LIGHTING": [
+        { icon: "✦", label: "Galería", detail: "La luz como argumento" },
+        { icon: "⌂", label: "2 públicos", detail: "Residencial y comercial" },
+        { icon: "↗", label: "Quote", detail: "Cotización sin fricción" },
+      ],
+    };
+
+    if (highlightsByProject[project.title]) return highlightsByProject[project.title];
+
     if (project.filters.includes("saas")) {
       return [
         { label: "Panel", detail: "Producto visual y datos" },
@@ -311,7 +373,7 @@ function initProjectCarousel() {
     if (!els.highlights) return;
 
     els.highlights.innerHTML = getProjectHighlights(project)
-      .map(item => `<div class="project-highlight"><span>${item.label}</span><small>${item.detail}</small></div>`)
+      .map(item => `<div class="project-highlight"><i aria-hidden="true">${item.icon || "↗"}</i><span>${item.label}</span><small>${item.detail}</small></div>`)
       .join("");
   }
 
@@ -329,6 +391,17 @@ function initProjectCarousel() {
     "GTM": "googletagmanager",
   };
 
+  const coreTechnologies = new Set([
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "PHP",
+    "MySQL",
+    "Figma",
+    "WordPress",
+    "WooCommerce",
+  ]);
+
   function renderTechnology(technology) {
     const icon = technologyIcons[technology];
     const image = icon
@@ -336,6 +409,19 @@ function initProjectCarousel() {
       : "";
 
     return `<span class="${icon ? "has-tech-icon" : ""}">${image}<b>${technology}</b></span>`;
+  }
+
+  function renderTechnologyGroups(technologies) {
+    const core = technologies.filter(technology => coreTechnologies.has(technology));
+    const capabilities = technologies.filter(technology => !coreTechnologies.has(technology));
+    const group = (label, className, items) => items.length
+      ? `<div class="project-tech-group ${className}"><small>${label}</small><div>${items.map(renderTechnology).join("")}</div></div>`
+      : "";
+
+    return [
+      group("Lenguajes y base", "is-core", core),
+      group("Integraciones y características", "is-capability", capabilities),
+    ].join("");
   }
 
   function updateDots() {
@@ -377,9 +463,10 @@ function initProjectCarousel() {
 
     const project = projects[activeIndex];
     const visiblePosition = getVisiblePosition(activeIndex);
-    const hasMotionPreview = Boolean(project.motion);
+    const hasMotionPreview = Boolean(project.motion || project.motionFrames?.length);
     const hasLivePreview = hasMotionPreview || isExternalLink(project.link);
 
+    projectCarousel.dataset.projectSlug = project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     projectCarousel.style.setProperty("--project-accent", project.accent);
     projectCarousel.style.setProperty("--project-glow", project.glow);
     projectCarousel.style.setProperty("--preview-duration", `${project.previewDuration || 18}s`);
@@ -408,20 +495,17 @@ function initProjectCarousel() {
     els.link.textContent = "Hablemos";
     if (els.liveDomain) els.liveDomain.textContent = getLinkDomain(project.link);
     els.image.style.backgroundImage = `url("${project.image}")`;
-    if (els.motionShots?.length) {
-      els.motionShots.forEach((shot, shotIndex) => {
-        const shouldUseShot = hasMotionPreview && (project.previewLoop !== false || shotIndex === 0);
+    if (els.motionTrack) {
+      const baseFrames = project.motionFrames?.length
+        ? project.motionFrames
+        : project.motion
+          ? [project.motion]
+          : [];
+      const previewFrames = project.previewLoop === false ? baseFrames : [...baseFrames, ...baseFrames];
 
-        shot.hidden = !shouldUseShot;
-
-        if (shouldUseShot && shot.getAttribute("src") !== project.motion) {
-          shot.src = project.motion;
-        }
-
-        if (!shouldUseShot) {
-          shot.removeAttribute("src");
-        }
-      });
+      els.motionTrack.innerHTML = previewFrames
+        .map(source => `<img class="project-motion-shot" src="${source}" alt="" loading="eager">`)
+        .join("");
     }
     if (els.motionTrack && hasMotionPreview) {
       els.motionTrack.style.animation = "none";
@@ -442,7 +526,7 @@ function initProjectCarousel() {
         els.frame.removeAttribute("src");
       }
     }
-    els.tech.innerHTML = project.technologies.map(renderTechnology).join("");
+    els.tech.innerHTML = renderTechnologyGroups(project.technologies);
     renderProjectHighlights(project);
 
     updateDots();
@@ -467,7 +551,9 @@ function initProjectCarousel() {
       prefersReducedMotion.matches
     ) return;
 
-    const delay = projects[activeIndex]?.motion ? (projects[activeIndex].previewDuration || 18) + 1.4 : 5.2;
+    const activeProject = projects[activeIndex];
+    const hasActiveMotion = Boolean(activeProject?.motion || activeProject?.motionFrames?.length);
+    const delay = hasActiveMotion ? (activeProject.previewDuration || 18) + 1.4 : 5.2;
 
     autoPlay = gsap.delayedCall(delay, () => {
       const currentPosition = getVisiblePosition(activeIndex);

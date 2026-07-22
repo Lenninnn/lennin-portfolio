@@ -2131,3 +2131,780 @@ body,
 .project-dot { width: 18px; background: #aaa9a3; }
 .project-dot.is-active { width: 34px; background: #111; }
 .project-control { color: #111; border-color: #bdbdb7; background: #fff; }
+
+/* Technical stack hierarchy. */
+.project-tech {
+  display: grid;
+  gap: 12px;
+}
+
+.project-tech-group {
+  display: grid;
+  gap: 7px;
+}
+
+.project-tech-group > small {
+  color: #555550;
+  font-size: .5rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.project-tech-group > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.project-tech-group.is-core span {
+  border-color: #bdbdb7;
+  color: #111111;
+  background: #f7f7f4;
+}
+
+.project-tech-group.is-capability span {
+  border-color: #cacac4;
+  color: #4f4f4a;
+  background: #ddddD7;
+}
+
+.project-tech-group.is-capability span img {
+  opacity: .68;
+}
+
+/* Readability fixes for the light project section. */
+.project-info {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.project-info h2 {
+  max-width: 100%;
+  font-size: clamp(2.25rem, 3.55vw, 4.4rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+[data-project-slug="gometrical"] .project-info h2 {
+  font-size: clamp(2.2rem, 3vw, 3.45rem);
+  letter-spacing: -.07em;
+  white-space: nowrap;
+}
+
+.project-copy p,
+.project-copy p:last-child,
+.project-detail,
+.project-highlight small,
+.project-live-link strong {
+  color: #555550;
+}
+
+.project-copy p:last-child {
+  color: #686863;
+}
+
+.project-highlight,
+.project-live-link,
+.project-copy p,
+.contact-form,
+.about-card,
+.about-metrics article,
+.about-process > div,
+.about-story article,
+.about-services article {
+  border-color: #d0d0ca;
+  background: #ededE8;
+}
+
+.project-gallery-toolbar {
+  border-color: #d0d0ca;
+}
+
+@media (max-width: 1180px) and (min-width: 981px) {
+  .project-info h2 {
+    font-size: clamp(2rem, 3.25vw, 3.1rem);
+  }
+}
+
+/* Balanced project layout: centered panel switch and contained desktop previews. */
+.section-switcher {
+  width: min(430px, calc(100% - 44px));
+  margin-right: auto;
+  margin-left: auto;
+  justify-content: center;
+}
+
+.section-switch {
+  flex: 1 1 0;
+  text-align: center;
+}
+
+.project-panel {
+  isolation: isolate;
+  contain: layout paint;
+}
+
+.project-panel[hidden],
+.project-panel[data-project-panel][hidden] {
+  display: none !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+}
+
+.project-panel[hidden] *,
+.project-panel[data-project-panel][hidden] * {
+  animation-play-state: paused !important;
+}
+
+@media (min-width: 981px) {
+  .project-shell {
+    width: min(1240px, calc(100% - 32px));
+  }
+
+  .project-panel[data-project-panel="projects"] {
+    grid-template-columns: minmax(0, 1.38fr) minmax(300px, .72fr);
+    gap: 12px clamp(24px, 3vw, 38px);
+  }
+
+  .project-gallery {
+    width: min(820px, 100%);
+    justify-self: center;
+  }
+
+  .project-gallery-toolbar {
+    width: min(820px, 100%);
+    justify-self: center;
+  }
+}
+
+.gallery-card-main {
+  aspect-ratio: 16 / 9;
+}
+
+.project-motion-shot {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: top center;
+}
+
+@media (max-width: 760px) {
+  .section-switcher {
+    width: min(360px, calc(100% - 20px));
+  }
+}
+
+/* Larger, clearer targets for the primary section navigation. */
+.section-switcher {
+  min-height: 64px;
+  padding: 0;
+}
+
+.section-switch {
+  min-height: 63px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.section-switch:hover,
+.section-switch:focus-visible {
+  color: #111111;
+  background: #e8e8e3;
+  outline: none;
+}
+
+.section-switch:focus-visible {
+  box-shadow: inset 0 0 0 2px #111111;
+}
+
+.section-switch.is-active::after {
+  bottom: -1px;
+  height: 3px;
+}
+
+/* Editorial labels: serif, conversational and varied instead of repeated UI eyebrows. */
+.about-intro > span,
+.about-story article > span,
+.about-services article > span,
+.about-profile-strip span,
+.about-process span,
+.about-diplomas-head > span,
+.about-timeline article > span,
+.contact-info > span,
+.project-tech-group > small {
+  color: #33332f;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(1rem, 1.35vw, 1.3rem);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+.project-tech-group > small::before,
+.about-story article > span::before,
+.about-services article > span::before,
+.about-diplomas-head > span::before {
+  content: "↳ ";
+  font-family: "Figtree", sans-serif;
+  font-style: normal;
+}
+
+/* Case-study evidence replaces generic feature cards. */
+.project-highlight-row {
+  gap: 0;
+}
+
+.project-highlight {
+  position: relative;
+  min-height: 104px;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  padding: 14px 14px 12px 0;
+  border: 0;
+  border-top: 1px solid #9f9f98;
+  background: transparent;
+}
+
+.project-highlight i {
+  grid-row: 1 / 3;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: #f4f4f1;
+  background: #111;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  font-style: normal;
+}
+
+.project-highlight span {
+  align-self: end;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(1.1rem, 1.45vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.project-highlight small {
+  align-self: start;
+  color: #5b5b56;
+  font-size: .68rem;
+  line-height: 1.35;
+}
+
+.project-live-link {
+  color: #fff;
+  border: 0;
+  background: #111;
+}
+
+.project-live-link strong,
+.project-live-link span {
+  color: #fff;
+}
+
+/* About is a personal editorial profile, not another grid of product cards. */
+.about-grid {
+  gap: 0 clamp(28px, 5vw, 72px);
+}
+
+.about-card {
+  position: relative;
+  min-height: 210px;
+  padding: 24px 0 28px;
+  border: 0;
+  border-top: 1px solid #9f9f98;
+  background: transparent;
+  box-shadow: none;
+}
+
+.about-card > span {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #111;
+  border-radius: 50%;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: 1.7rem;
+}
+
+.about-card:nth-child(2n) > span {
+  color: #111;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: transparent;
+  transform: rotate(45deg);
+}
+
+.about-card:nth-child(2n) > span::first-letter {
+  transform: rotate(-45deg);
+}
+
+.about-card h3 {
+  margin-top: 34px;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 3.1rem);
+  font-weight: 400;
+  letter-spacing: -.025em;
+  line-height: .95;
+}
+
+.about-metrics {
+  gap: 2px;
+  background: #111;
+}
+
+.about-metrics article {
+  min-height: 190px;
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+  background: #111;
+}
+
+.about-metrics article:nth-child(even) {
+  color: #111;
+  background: #d8d8d1;
+}
+
+.about-metrics article span {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+
+.about-process > div,
+.about-story article,
+.about-services article,
+.about-profile-strip > div,
+.about-timeline article,
+.about-diplomas,
+.diploma-card {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.about-process > div,
+.about-story article,
+.about-services article,
+.about-timeline article {
+  border: 0;
+  border-top: 1px solid #aaa9a3;
+}
+
+/* Harmonized typography and balanced editorial blocks. */
+.about-intro > span,
+.about-story article > span,
+.about-services article > span,
+.about-profile-strip span,
+.about-process span,
+.about-diplomas-head > span,
+.about-timeline article > span,
+.contact-info > span,
+.project-tech-group > small,
+.project-highlight span,
+.about-card h3,
+.about-metrics article span {
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-style: normal;
+}
+
+.about-intro > span,
+.about-story article > span,
+.about-services article > span,
+.about-profile-strip span,
+.about-process span,
+.about-diplomas-head > span,
+.about-timeline article > span,
+.contact-info > span,
+.project-tech-group > small {
+  font-size: .67rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.project-tech-group > small::before,
+.about-story article > span::before,
+.about-services article > span::before,
+.about-diplomas-head > span::before {
+  content: "— ";
+}
+
+.project-gallery-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(150px, 1fr);
+  align-items: stretch;
+  gap: 10px;
+}
+
+.project-highlight-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.project-highlight {
+  min-height: 148px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 20px 12px;
+  border: 1px solid #c9c9c3;
+  text-align: center;
+}
+
+.project-highlight + .project-highlight {
+  border-left: 0;
+}
+
+.project-highlight i {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 5px;
+}
+
+.project-highlight span {
+  font-size: clamp(1.55rem, 2.2vw, 2.35rem);
+  font-weight: 600;
+  letter-spacing: -.055em;
+  line-height: .95;
+}
+
+.project-highlight small {
+  max-width: 19ch;
+  color: #555550;
+  font-size: .67rem;
+  line-height: 1.4;
+}
+
+.project-live-link {
+  min-height: 148px;
+  height: auto;
+  align-self: stretch;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-panel-inner {
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+  align-items: stretch;
+}
+
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.about-intro .project-btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.about-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1px 24px;
+}
+
+.about-card {
+  min-height: 0;
+  padding: 18px 0 22px;
+}
+
+.about-card > span {
+  width: 38px;
+  height: 38px;
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-size: 1.05rem;
+}
+
+.about-card h3 {
+  margin-top: 18px;
+  font-size: clamp(1.25rem, 1.8vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.about-card p {
+  margin-top: 9px;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.about-metrics article {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.about-metrics article span {
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -.07em;
+  line-height: .9;
+}
+
+.about-metrics article p {
+  max-width: 26ch;
+  margin: 18px auto 0;
+  color: currentColor;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .project-gallery-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .project-live-link {
+    min-height: 90px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+
+/* Moving tool field and non-generic section markers. */
+.project-tech-group > small::before,
+.about-story article > span::before,
+.about-services article > span::before,
+.about-diplomas-head > span::before {
+  content: "◆";
+  display: inline-block;
+  margin-right: 8px;
+  font-size: .55em;
+  transform: translateY(-1px) rotate(45deg);
+}
+
+.about-stack {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: none;
+  display: block;
+  margin: 28px 0 8px;
+  overflow: hidden;
+}
+
+.stack-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 7px 0;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.stack-track {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: stackFlowRight 58s linear infinite;
+  will-change: transform;
+}
+
+.stack-marquee.is-secondary .stack-track {
+  animation-duration: 68s;
+  animation-delay: -21s;
+}
+
+.stack-track span {
+  min-height: 48px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 18px;
+  border: 1px solid #d1d1cb;
+  border-radius: 3px;
+  color: #3f3f3b;
+  background: #f1f1ed;
+  font-family: "Manrope", "Figtree", sans-serif;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.stack-marquee.is-secondary .stack-track span {
+  color: #f4f4f1;
+  border-color: #2e2e2b;
+  background: #171716;
+}
+
+.stack-track img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.stack-marquee.is-secondary img {
+  filter: invert(1);
+}
+
+@keyframes stackFlowRight {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.about-metrics article:nth-child(odd),
+.about-metrics article:nth-child(odd) span,
+.about-metrics article:nth-child(odd) p {
+  color: #ffffff;
+}
+
+.about-metrics article:nth-child(even),
+.about-metrics article:nth-child(even) span,
+.about-metrics article:nth-child(even) p {
+  color: #111111;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Compact, unified case-study summary. */
+.project-gallery-toolbar {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid #c8c8c2;
+  background: #f4f4f1;
+}
+
+.project-highlight-row {
+  display: contents;
+}
+
+.project-highlight {
+  min-height: 132px;
+  padding: 17px 14px;
+  gap: 5px;
+  border: 0;
+  border-right: 1px solid #c8c8c2;
+  background: transparent;
+}
+
+.project-highlight + .project-highlight {
+  border-left: 0;
+}
+
+.project-highlight i {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 7px;
+  border: 1px solid #111111;
+  border-radius: 50%;
+  color: #111111;
+  background: transparent;
+  clip-path: none;
+  font-size: .82rem;
+}
+
+.project-highlight span {
+  font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+}
+
+.project-highlight small {
+  max-width: 22ch;
+  font-size: .64rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.project-live-link {
+  position: relative;
+  min-height: 132px;
+  padding: 18px 42px 18px 18px;
+  border: 0;
+  color: #111111;
+  background: transparent;
+  text-align: left;
+}
+
+.project-live-link::after {
+  content: "↗";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #111111;
+  transform: translateY(-50%);
+  transition: transform 180ms ease;
+}
+
+.project-live-link span,
+.project-live-link strong {
+  color: #111111;
+}
+
+.project-live-link span {
+  font-size: .56rem;
+}
+
+.project-live-link strong {
+  max-width: 16ch;
+  margin-top: 5px;
+  font-size: .67rem;
+}
+
+.project-live-link:hover,
+.project-live-link:focus-visible {
+  border-color: transparent;
+  background: #e5e5df;
+  transform: none;
+}
+
+.project-live-link:hover::after,
+.project-live-link:focus-visible::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 900px) {
+  .project-gallery-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-highlight:nth-child(2) {
+    border-right: 0;
+  }
+
+  .project-highlight:nth-child(-n + 2) {
+    border-bottom: 1px solid #c8c8c2;
+  }
+
+  .project-live-link {
+    border-top: 1px solid #c8c8c2;
+  }
+}
