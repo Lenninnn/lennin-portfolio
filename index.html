@@ -12,7 +12,7 @@
 
   <link rel="icon" type="image/png" href="assets/img/black%20logo.png" />
   <link rel="apple-touch-icon" href="assets/img/black%20logo.png" />
-  <link rel="stylesheet" href="style.css?v=20260722-22" />
+  <link rel="stylesheet" href="style.css?v=20260722-25" />
   <title>Lennin Sanchez | Full Stack Developer</title>
 </head>
 
@@ -24,7 +24,7 @@
     <section class="screen screen-hero reveal" id="inicio">
       <header class="nav">
         <a href="#inicio" class="logo">
-          <img src="assets/img/white logo.png" alt="Lennin">
+          <img src="assets/img/logo-lennin-dev.png" alt="Lennin Dev">
         </a>
 
         <nav>
@@ -62,7 +62,7 @@
 <section class="screen screen-project reveal" id="proyectos">
   <header class="nav">
     <a href="#inicio" class="logo">
-      <img src="assets/img/white logo.png" alt="Lennin">
+      <img src="assets/img/logo-lennin-dev.png" alt="Lennin Dev">
     </a>
 
     <nav>
@@ -415,7 +415,7 @@
     <section class="screen screen-contact reveal" id="contacto">
       <header class="nav">
         <a href="#inicio" class="logo">
-          <img src="assets/img/white logo.png" alt="Lennin">
+          <img src="assets/img/logo-lennin-dev.png" alt="Lennin Dev">
         </a>
 
         <nav>
@@ -445,14 +445,18 @@
           </div>
         </div>
 
-        <form class="contact-form">
+        <form class="contact-form" action="https://formsubmit.co/lenninlincoln@gmail.com" method="POST">
           <h3>¡Hablemos!</h3>
 
-          <input type="text" placeholder="Tu Nombre" />
-          <input type="email" placeholder="Tu Correo Electrónico" />
-          <textarea placeholder="Tu Mensaje"></textarea>
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde el portafolio de Lennin" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
 
-          <button type="button">Enviar Mensaje +</button>
+          <input type="text" name="name" placeholder="Tu Nombre" aria-label="Tu nombre" autocomplete="name" required />
+          <input type="email" name="email" placeholder="Tu Correo Electrónico" aria-label="Tu correo electrónico" autocomplete="email" required />
+          <textarea name="message" placeholder="Tu Mensaje" aria-label="Tu mensaje" required></textarea>
+
+          <button type="submit">Enviar Mensaje +</button>
         </form>
       </div>
 
@@ -471,6 +475,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260722-4"></script>
 </body>
 </html>

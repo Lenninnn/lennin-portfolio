@@ -160,16 +160,34 @@ const projects = [
     title: "DELICIAS BENDITAS",
     type: "Sitio web",
     filters: ["websites"],
-    tagline: "Catálogo dulce y pedidos claros",
+    tagline: "Vista completa: el sitio recorre su contenido automáticamente",
     description:
-      "Sitio web para productos dulces con catálogo responsive, tarjetas limpias y un flujo de contacto simple para facilitar pedidos.",
+      "Experiencia web para una marca de alimentos colombianos con catálogo, líneas de producto, consejos de preparación y recorrido comercial.",
     detail:
-      "La experiencia se concentra en mostrar productos de forma apetecible, ordenar categorías y llevar al cliente hacia una acción clara. Se trabaja un diseño cálido, visualmente limpio y adaptable a móvil para que el catálogo sea fácil de revisar.",
-    technologies: ["HTML", "CSS", "JavaScript", "Catálogo responsive", "Cards de producto", "CTA WhatsApp"],
-    link: "#contacto",
+      "El sitio construye una presencia de marca completa: productos congelados, listos y horneados, carrito sincronizado, acceso de usuario, consejos, contacto y WhatsApp. La vista del portafolio reproduce el recorrido completo en formato de escritorio y el enlace permite continuar hacia sus flujos interactivos.",
+    technologies: ["HTML", "CSS", "JavaScript", "PHP", "Catálogo", "Carrito", "Responsive", "WhatsApp"],
+    link: "https://darkgray-emu-217076.hostingersite.com/",
+    image: "assets/projects/delicias-benditas-full.png",
+    motion: "assets/projects/delicias-benditas-full.png",
+    previewDuration: 70,
+    previewTravel: "-50%",
+    accent: "#801D3A",
+    glow: "rgba(128, 29, 58, 0.14)",
+  },
+  {
+    title: "DEL VINILO AL ALGORITMO",
+    type: "Proyecto académico",
+    filters: ["academic"],
+    tagline: "Interactúa aquí: usa scroll, sonido y controles de exploración",
+    description:
+      "Narrativa web inmersiva sobre la evolución de la distribución musical: del vinilo y el cassette al streaming guiado por algoritmos.",
+    detail:
+      "La investigación se transforma en experiencia. El visitante atraviesa etapas, compara ritual físico y velocidad digital, entra a un museo interactivo y explora escenarios con controles de movimiento e interacción. No es una lectura lineal: está diseñada para descubrirse usando scroll, sonido y participación.",
+    technologies: ["HTML", "CSS", "JavaScript", "GSAP", "Canvas 3D", "Narrativa interactiva", "Audio", "UX inmersiva"],
+    link: "https://antiquewhite-newt-357769.hostingersite.com/",
     image: "assets/portfolio-preview.png",
-    accent: "#e4d1b5",
-    glow: "rgba(228, 209, 181, 0.17)",
+    accent: "#C9A56A",
+    glow: "rgba(201, 165, 106, 0.14)",
   },
   {
     title: "ELEMENTO INMOBILIARIO",
@@ -245,6 +263,7 @@ const projectFilters = [
   { label: "SaaS", value: "saas" },
   { label: "Sitios web", value: "websites" },
   { label: "UI/UX", value: "uiux" },
+  { label: "Académicos", value: "academic" },
 ];
 
 function initProjectCarousel() {
@@ -371,9 +390,14 @@ function initProjectCarousel() {
         { icon: "⌁", label: "Operación", detail: "Registros visibles en admin" },
       ],
       "DELICIAS BENDITAS": [
-        { icon: "◇", label: "Catálogo", detail: "Productos fáciles de recorrer" },
-        { icon: "↗", label: "Pedido", detail: "Camino corto hacia WhatsApp" },
-        { icon: "◎", label: "Móvil", detail: "Lectura pensada para antojos" },
+        { icon: "◇", label: "3 líneas", detail: "Congelados, listos y horneados" },
+        { icon: "↗", label: "Carrito", detail: "Compra y cuenta conectadas" },
+        { icon: "◎", label: "Recorrido", detail: "Marca, producto y preparación" },
+      ],
+      "DEL VINILO AL ALGORITMO": [
+        { icon: "◇", label: "4 eras", detail: "Vinilo, cassette, CD y streaming" },
+        { icon: "↗", label: "Museo 3D", detail: "Exploración con movimiento y acciones" },
+        { icon: "◎", label: "Inmersión", detail: "Scroll, narrativa, sonido e interacción" },
       ],
       "ELEMENTO INMOBILIARIO": [
         { icon: "⌂", label: "Inventario", detail: "Propiedades con contexto" },
