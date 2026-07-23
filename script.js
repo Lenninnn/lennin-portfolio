@@ -43,6 +43,54 @@ if (contactForm) {
   });
 }
 
+/* On mobile, demonstrate each horizontal rail once when it enters the viewport. */
+function initMobileSwipeDemos() {
+  const mobileViewport = window.matchMedia("(max-width: 760px)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const rails = [...document.querySelectorAll(
+    ".project-name-row, .project-gallery-toolbar, .about-metrics"
+  )];
+
+  if (!mobileViewport.matches || reducedMotion.matches || !rails.length) return;
+
+  const demonstrate = rail => {
+    if (rail.dataset.swipeDemonstrated === "true") return;
+    if (rail.scrollWidth <= rail.clientWidth + 8) return;
+
+    rail.dataset.swipeDemonstrated = "true";
+    const start = rail.scrollLeft;
+    const distance = Math.min(64, Math.max(34, rail.clientWidth * .12));
+
+    rail.classList.add("is-swipe-demonstrating");
+    rail.scrollTo({ left: start + distance, behavior: "smooth" });
+
+    window.setTimeout(() => {
+      rail.scrollTo({ left: start, behavior: "smooth" });
+    }, 620);
+
+    window.setTimeout(() => {
+      rail.scrollTo({ left: start + Math.round(distance * .55), behavior: "smooth" });
+    }, 1180);
+
+    window.setTimeout(() => {
+      rail.scrollTo({ left: start, behavior: "smooth" });
+      rail.classList.remove("is-swipe-demonstrating");
+    }, 1740);
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting || entry.intersectionRatio < .45) return;
+      window.setTimeout(() => demonstrate(entry.target), 260);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: [.45] });
+
+  rails.forEach(rail => observer.observe(rail));
+}
+
+initMobileSwipeDemos();
+
 const heroForms = document.querySelectorAll(".hero-form");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -929,6 +977,14 @@ function initProjectCarousel() {
       const currentPosition = getVisiblePosition(activeIndex);
       const nextPosition = (currentPosition + 1) % visibleIndexes.length;
       changeProject(visibleIndexes[nextPosition], 1);
+    });
+
+    projectCarousel.querySelector("[data-project-prev-mobile]")?.addEventListener("click", () => {
+      els.prev.click();
+    });
+
+    projectCarousel.querySelector("[data-project-next-mobile]")?.addEventListener("click", () => {
+      els.next.click();
     });
 
     els.panelButtons.forEach(button => {
