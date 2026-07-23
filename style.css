@@ -4906,3 +4906,63 @@ body,
     background: var(--mobile-ink);
   }
 }
+
+/* Hero optical balance: preserve the composition while clearing interactive areas. */
+@media (min-width: 761px) {
+  .hero-content h1 {
+    font-size: clamp(5.6rem, 18.5vw, 16.5rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-content {
+    width: calc(100% - (var(--mobile-gutter) * 2));
+    justify-items: center;
+    text-align: center;
+  }
+
+  .hero-content > span,
+  .hero-content > p {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    font-size: clamp(4.65rem, 26.5vw, 7.35rem);
+    letter-spacing: -.078em;
+    text-align: center;
+    text-indent: .035em;
+  }
+
+  .hero-content .hero-social {
+    position: relative;
+    z-index: 8;
+    margin-inline: auto;
+  }
+
+  /* Keep the moving circles away from the social controls. */
+  .hero-form-square {
+    right: 4%;
+    bottom: 14%;
+  }
+
+  .hero-form-edge {
+    top: auto;
+    right: auto;
+    bottom: 27%;
+    left: 4%;
+  }
+
+  .hero-form-corner {
+    bottom: 5%;
+    left: -6%;
+  }
+
+  .hero-form-sphere {
+    top: 48%;
+    right: 5%;
+  }
+}
