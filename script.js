@@ -19,41 +19,27 @@ const contactForm = document.querySelector('.contact-form');
 
 if (contactForm) {
   const contactStatus = contactForm.querySelector('[data-contact-status]');
-  const contactButton = contactForm.querySelector('button[type="submit"]');
-  const defaultButtonText = contactButton?.textContent || 'Enviar Mensaje +';
 
-  contactForm.addEventListener('submit', async event => {
+  contactForm.addEventListener('submit', event => {
     event.preventDefault();
 
     if (!contactForm.reportValidity()) return;
 
-    contactButton.disabled = true;
-    contactButton.textContent = 'Enviando…';
-    contactStatus.textContent = '';
-    contactStatus.className = 'contact-form-status';
+    const formData = new FormData(contactForm);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const whatsappMessage = [
+      `Hola Lennin, soy ${name}.`,
+      `Mi correo es ${email}.`,
+      '',
+      message,
+    ].join('\n');
+    const whatsappUrl = `${contactForm.action}?text=${encodeURIComponent(whatsappMessage)}`;
 
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { Accept: 'application/json' },
-      });
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'No fue posible enviar el mensaje.');
-      }
-
-      contactForm.reset();
-      contactStatus.textContent = result.message;
-      contactStatus.classList.add('is-success');
-    } catch (error) {
-      contactStatus.textContent = error.message || 'No fue posible enviar el mensaje. Intenta nuevamente.';
-      contactStatus.classList.add('is-error');
-    } finally {
-      contactButton.disabled = false;
-      contactButton.textContent = defaultButtonText;
-    }
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    contactStatus.textContent = 'WhatsApp se abrió en una pestaña nueva.';
+    contactStatus.className = 'contact-form-status is-success';
   });
 }
 
