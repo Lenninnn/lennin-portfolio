@@ -564,6 +564,16 @@ function initProjectCarousel() {
       chip.hidden = !isVisible;
       chip.classList.toggle("is-active", isActive);
       chip.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+      if (isActive && window.matchMedia("(max-width: 760px)").matches) {
+        requestAnimationFrame(() => {
+          chip.scrollIntoView({
+            behavior: prefersReducedMotion.matches ? "auto" : "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+        });
+      }
     });
   }
 
