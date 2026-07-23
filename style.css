@@ -4862,6 +4862,10 @@ body,
 
 /* Mobile reliability: content must never depend on an intersection threshold. */
 @media (max-width: 760px) {
+  .contact-info > span {
+    display: none;
+  }
+
   .reveal > *,
   .reveal.is-visible > * {
     opacity: 1 !important;
@@ -4891,8 +4895,8 @@ body,
 
   .screen-project > .social a,
   .screen-contact > .social a {
-    width: 42px;
-    height: 42px;
+    width: 54px;
+    height: 54px;
     display: grid;
     place-items: center;
     border: 1px solid var(--mobile-line);
@@ -4902,6 +4906,13 @@ body,
     line-height: 1;
     text-align: center;
     text-transform: lowercase;
+  }
+
+  .screen-project > .social a svg,
+  .screen-contact > .social a svg {
+    width: 24px;
+    height: 24px;
+    display: block;
   }
 
   .screen-project > .social a:active,
