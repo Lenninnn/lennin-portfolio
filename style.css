@@ -4930,6 +4930,17 @@ body,
 }
 
 @media (max-width: 760px) {
+  .hero-social a {
+    width: 54px;
+    height: 54px;
+  }
+
+  .hero-social img,
+  .hero-social svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .hero-form-orbit {
     display: none !important;
   }
