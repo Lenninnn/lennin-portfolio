@@ -1669,6 +1669,18 @@ textarea {
   cursor: pointer;
 }
 
+.contact-form-status {
+  min-height: 1.4em;
+  margin: 0;
+  color: #555550;
+  font-size: .72rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.contact-form-status.is-success { color: #27623a; }
+.contact-form-status.is-error { color: #9c2f22; }
+
 /* ANIMACIÓN SCROLL */
 
 .reveal > * {

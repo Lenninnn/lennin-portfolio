@@ -1,0 +1,12 @@
+# Configuración privada SMTP
+config/mail.php
+
+# Dependencias PHP / Composer
+vendor/
+
+# Variables de entorno
+.env
+.env.local
+
+# Sistema
+.DS_Store

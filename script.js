@@ -15,6 +15,48 @@ const observer = new IntersectionObserver(
 
 sections.forEach(section => observer.observe(section));
 
+const contactForm = document.querySelector('.contact-form');
+
+if (contactForm) {
+  const contactStatus = contactForm.querySelector('[data-contact-status]');
+  const contactButton = contactForm.querySelector('button[type="submit"]');
+  const defaultButtonText = contactButton?.textContent || 'Enviar Mensaje +';
+
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+
+    if (!contactForm.reportValidity()) return;
+
+    contactButton.disabled = true;
+    contactButton.textContent = 'Enviando…';
+    contactStatus.textContent = '';
+    contactStatus.className = 'contact-form-status';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' },
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'No fue posible enviar el mensaje.');
+      }
+
+      contactForm.reset();
+      contactStatus.textContent = result.message;
+      contactStatus.classList.add('is-success');
+    } catch (error) {
+      contactStatus.textContent = error.message || 'No fue posible enviar el mensaje. Intenta nuevamente.';
+      contactStatus.classList.add('is-error');
+    } finally {
+      contactButton.disabled = false;
+      contactButton.textContent = defaultButtonText;
+    }
+  });
+}
+
 const heroForms = document.querySelectorAll(".hero-form");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
